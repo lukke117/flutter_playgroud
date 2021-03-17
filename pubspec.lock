@@ -29,6 +29,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  chess:
+    dependency: "direct main"
+    description:
+      name: chess
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.6"
+  chess_vectors_flutter:
+    dependency: transitive
+    description:
+      name: chess_vectors_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.12"
   clock:
     dependency: transitive
     description:
@@ -69,6 +83,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_stateless_chessboard:
+    dependency: "direct main"
+    description:
+      name: flutter_stateless_chessboard
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -95,6 +116,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.5"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -106,7 +134,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.1"
   stack_trace:
     dependency: transitive
     description:
@@ -142,6 +170,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.19"
+  tuple:
+    dependency: transitive
+    description:
+      name: tuple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
   typed_data:
     dependency: transitive
     description:
@@ -158,3 +193,4 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
+  flutter: ">=1.17.0"

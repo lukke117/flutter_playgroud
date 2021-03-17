@@ -8,6 +8,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  flutter_stateless_chessboard: ^0.0.2
+  chess: ^0.6.5
   flutter:
     sdk: flutter
 
