@@ -2,26 +2,32 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: 'Navigation Basics',
-    home: FirstRoute(),
+    title: 'Named Routes Demo',
+    // Start the app with the "/" named route. In this case, the app starts
+    // on the FirstScreen widget.
+    initialRoute: '/',
+    routes: {
+      // When navigating to the "/" route, build the FirstScreen widget.
+      '/': (context) => FirstScreen(),
+      // When navigating to the "/second" route, build the SecondScreen widget.
+      '/second': (context) => SecondScreen(),
+    },
   ));
 }
 
-class FirstRoute extends StatelessWidget {
+class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First Route'),
+        title: Text('First Screen'),
       ),
       body: Center(
         child: ElevatedButton(
-          child: Text('Open route'),
+          child: Text('Launch screen'),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondRoute()),
-            );
+            // Navigate to the second screen using a named route.
+            Navigator.pushNamed(context, '/second');
           },
         ),
       ),
@@ -29,16 +35,18 @@ class FirstRoute extends StatelessWidget {
   }
 }
 
-class SecondRoute extends StatelessWidget {
+class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Route"),
+        title: Text("Second Screen"),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
+            // Navigate back to the first screen by popping the current route
+            // off the stack.
             Navigator.pop(context);
           },
           child: Text('Go back!'),
