@@ -32,6 +32,22 @@ class BodyWidget extends StatelessWidget {
           "My wonderful app.",
           style: TextStyle(fontSize: 20),
         ),
+        Row(
+          children: [
+            ElevatedButton(
+              onPressed: () {},
+              child: Text("Small"),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text("Medium"),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text("Large"),
+            ),
+          ],
+        )
       ],
     );
   }
