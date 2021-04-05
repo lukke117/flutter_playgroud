@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
 
-import 'home_page/home_page.dart';
-
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        body: BodyWidget(),
+      ),
+    );
+  }
+}
+
+class BodyWidget extends StatelessWidget {
+  const BodyWidget({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: BodyWidget(),
-      ),
+    return Column(
+      children: [
+        Text(
+          "My wonderful app.",
+          style: TextStyle(fontSize: 20),
+        ),
+      ],
     );
   }
 }
