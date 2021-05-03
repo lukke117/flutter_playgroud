@@ -1,54 +1,50 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-void main() {
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        body: BodyWidget(),
+      home: FutureBuilder(
+        future: _fbApp,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Sorry, there was an error');
+          } else if (snapshot.hasData) {
+            return MyHomePage();
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }
 }
 
-class BodyWidget extends StatelessWidget {
-  const BodyWidget({
-    Key key,
-  }) : super(key: key);
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "My wonderful app.",
-          style: TextStyle(fontSize: 20),
-        ),
-        Row(
-          children: [
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Small"),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Medium"),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Large"),
-            ),
-          ],
-        )
-      ],
+    return Scaffold(
+      body: Container(
+        child:
+        Column(children: [
+          ElevatedButton(onPressed: (){
+            print('hi');
+            DatabaseReference _testRef = FirebaseDatabase.instance.reference().child("test");
+            _testRef.set("hello ${Random().nextInt(100)}")  ;
+          }, child: Text('Update firebase database'))
+        ],),
+      ),
     );
   }
 }
