@@ -1,73 +1,47 @@
-import 'package:class_example_app/authentication_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: AuthenticationWrapper());
+
+    return MaterialApp(home: HomePage());
   }
 }
 
-class AuthenticationWrapper extends StatelessWidget {
-  final _authService = AuthenticationService(FirebaseAuth.instance);
+class HomePage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<User>(
-      stream: _authService.authStateChanges,
-      builder: (context, snapshot) {
-        final user = snapshot.data;
-        if (user == null) {
-          return SignInPage(authService: _authService);
-        } else {
-          return HomePage(
-            authService: _authService,
-          );
-        }
-      },
-    );
-  }
-}
+  Widget build(BuildContext context,) {
 
-class SignInPage extends StatelessWidget {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final AuthenticationService authService;
-
-  SignInPage({Key key, this.authService});
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          TextField(
-            controller: emailController,
-            decoration: InputDecoration(
-              labelText: "Email",
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.teal,
+              child: OrientationBuilder(
+                builder: (context, orientation,) => Center(
+                  child: Message(deviceOrientation: orientation),
+                ),
+              ),
             ),
           ),
-          TextField(
-            controller: passwordController,
-            decoration: InputDecoration(
-              labelText: "Password",
+          Expanded(
+            flex: 3,
+            child: OrientationBuilder(
+              builder: (context, orientation,) => Container(
+                color: Colors.white,
+                child: Center(
+                  child: Message(deviceOrientation: orientation),
+                ),
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              authService.signIn(
-                email: emailController.text,
-                password: passwordController.text,
-              );
-            },
-            child: Text('Sign in'),
           ),
         ],
       ),
@@ -75,26 +49,27 @@ class SignInPage extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  final AuthenticationService authService;
+class Message extends StatelessWidget {
+  const Message({
+    Key key,
+    @required this.deviceOrientation,
+  }) : super(key: key);
 
-  HomePage({Key key, this.authService});
+  final Orientation deviceOrientation;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Text('HOME'),
-            ElevatedButton(
-              onPressed: () {
-                authService.signOut();
-              },
-              child: Text('Log out'),
-            ),
-          ],
-        ),
-      ),
+    String message;
+
+    if ( deviceOrientation == Orientation.portrait ){
+      message = "hello";
+    }
+    else{
+      message = "hello Suuuuuuuuuuuuuuuuuuuuuuuper long";
+    }
+    return Text(
+     message,
+      style: TextStyle(color: Colors.black, fontSize: 18),
     );
   }
 }
